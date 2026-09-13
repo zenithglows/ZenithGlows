@@ -1,0 +1,11 @@
+services:
+  site:
+    image: python:3.13-slim
+    working_dir: /workspace
+    network_mode: host
+    volumes:
+      - .:/workspace:ro
+    environment:
+      IS_ALLOY: ${IS_ALLOY:-false}
+    command: python -m http.server 3000 --bind 0.0.0.0 --directory /workspace
+    restart: unless-stopped
